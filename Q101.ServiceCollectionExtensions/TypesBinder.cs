@@ -83,48 +83,58 @@ namespace Q101.ServiceCollectionExtensions
         /// Use scoped lifetime
         /// </summary>
         /// <returns></returns>
-        public void AsScoped()
+        public TypesBinder AsScoped()
         {
             LifeTimeOptions = LifeTimeOptions.Scoped;
+
+            return this;
         }
 
         /// <summary>
         /// Use singleton lifetime
         /// </summary>
-        public void AsSingleton()
+        public TypesBinder AsSingleton()
         {
             LifeTimeOptions = LifeTimeOptions.Singleton;
+
+            return this;
         }
 
         /// <summary>
         /// Use transient lifetime
         /// </summary>
-        public void AsTransient()
+        public TypesBinder AsTransient()
         {
             LifeTimeOptions = LifeTimeOptions.Transient;
+
+            return this;
         }
 
         /// <summary>
         /// Use option "AsImplementedInterfaces"
         /// </summary>
-        public void AsImplementedInterfaces()
+        public TypesBinder AsImplementedInterfaces()
         {
             IsImplementByInterface = true;
+
+            return this;
         }
 
         /// <summary>
         /// Use option "PropertiesAutowired"
         /// </summary>
-        public void PropertiesAutowired()
+        public TypesBinder PropertiesAutowired()
         {
             IsPropertiesAutoWired = true;
+
+            return this;
         }
 
         /// <summary>
         /// Filter assembly types by functor
         /// </summary>
         /// <param name="func"></param>
-        public void Where(Func<Type, bool> func)
+        public TypesBinder Where(Func<Type, bool> func)
         {
             if (Assembly != null
                 || Types != null && Types.Any())
@@ -141,13 +151,15 @@ namespace Q101.ServiceCollectionExtensions
                             .Where(func)
                             .ToArray();
             }
+
+            return this;
         }
 
         /// <summary>
         /// Filter assembly types by type name
         /// </summary>
         /// <param name="nameComparer"></param>
-        public void WhereTypeName(Func<string, bool> nameComparer)
+        public TypesBinder WhereTypeName(Func<string, bool> nameComparer)
         {
             if (Assembly != null
                 || Types != null && Types.Any())
@@ -164,12 +176,14 @@ namespace Q101.ServiceCollectionExtensions
                             .Where(t => nameComparer(t.Name))
                             .ToArray();
             }
+
+            return this;
         }
 
         /// <summary>
         /// Bind types by options
         /// </summary>
-        public  void Bind()
+        public void Bind()
         {
             if (Assembly != null
                 || Types != null && !Types.Any())
