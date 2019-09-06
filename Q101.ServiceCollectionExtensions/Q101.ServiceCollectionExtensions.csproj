@@ -2,6 +2,17 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.2</TargetFramework>
+    <Version>1.0.1</Version>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+    <Authors>Alexei Tkachev</Authors>
+    <Copyright>Copyright Q101 2019</Copyright>
+    <PackageProjectUrl>https://github.com/Axelweaver/q101-net-core22-service-collection-extensions</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/Axelweaver/q101-net-core22-service-collection-extensions</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageTags>IServiceCollection Extensions DependencyInjection netCore</PackageTags>
+    <Description>This assembly helps you bind types immediately with a list. The assembly is an extension of type IServiceCollection. See the link to the github for a description</Description>
+    <PackageReleaseNotes>Restruct class library</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>

@@ -10,6 +10,17 @@ namespace Q101.ServiceCollectionExtensions.Helpers
     /// </summary>
     internal class ImplementByInterfaceHelper
     {
+        private readonly AddBindingWrapper _addBindingWrapper;
+
+        /// <summary>
+        /// ctor
+        /// </summary>
+        /// <param name="addBindingWrapper"></param>
+        internal ImplementByInterfaceHelper(AddBindingWrapper addBindingWrapper)
+        {
+            _addBindingWrapper = addBindingWrapper;
+        }
+
         /// <summary>
         /// Add service bind by implemented interface
         /// </summary>
@@ -17,7 +28,7 @@ namespace Q101.ServiceCollectionExtensions.Helpers
         /// <param name="type">Binding type</param>
         /// <param name="options">Life time binding option</param>
         /// <param name="propertyAutoWired">Use option auto wired property</param>
-        internal static void Add(IServiceCollection services,
+        internal void Add(IServiceCollection services,
                                  Type type,
                                  LifeTimeOptions options,
                                  bool propertyAutoWired)
@@ -26,11 +37,11 @@ namespace Q101.ServiceCollectionExtensions.Helpers
                         type.GetInterfaces()
                             .FirstOrDefault();
 
-            AddBindingWrapper.Add(services, 
-                                  type, 
-                                  implementedInterface, 
-                                  options, 
-                                  propertyAutoWired);
+            _addBindingWrapper.Add(services, 
+                                   type, 
+                                   implementedInterface, 
+                                   options, 
+                                   propertyAutoWired);
         }
     }
 }

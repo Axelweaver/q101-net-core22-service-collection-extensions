@@ -7,15 +7,31 @@ namespace Q101.ServiceCollectionExtensions.Helpers
     /// </summary>
     internal class SingleTypeBindHelper
     {
+        private readonly AddBindingWrapper _addBindingWrapper;
+
+        private readonly ImplementByInterfaceHelper _implementByInterfaceHelper;
+
+        /// <summary>
+        /// ctor
+        /// </summary>
+        /// <param name="addBindingWrapper"></param>
+        /// <param name="implementByInterfaceHelper"></param>
+        internal SingleTypeBindHelper(AddBindingWrapper addBindingWrapper,
+                                    ImplementByInterfaceHelper implementByInterfaceHelper)
+        {
+            _addBindingWrapper = addBindingWrapper;
+
+            _implementByInterfaceHelper = implementByInterfaceHelper;
+        }
         /// <summary>
         /// Bind type
         /// </summary>
         /// <param name="bindingTypes"></param>
-        internal static void Bind(BindingTypes bindingTypes)
+        internal void Bind(TypesBinder bindingTypes)
         {
             if (bindingTypes.ImplementType != null)
             {
-                AddBindingWrapper.Add(
+                _addBindingWrapper.Add(
                     bindingTypes.Services,
                     bindingTypes.SingleType,
                     bindingTypes.ImplementType,
@@ -24,7 +40,7 @@ namespace Q101.ServiceCollectionExtensions.Helpers
             }
             else if (bindingTypes.IsImplementByInterface)
             {
-                ImplementByInterfaceHelper.Add(
+                _implementByInterfaceHelper.Add(
                     bindingTypes.Services,
                     bindingTypes.SingleType,
                     bindingTypes.LifeTimeOptions,
@@ -32,7 +48,7 @@ namespace Q101.ServiceCollectionExtensions.Helpers
             }
             else
             {
-                AddBindingWrapper.Add(
+                _addBindingWrapper.Add(
                     bindingTypes.Services,
                     bindingTypes.SingleType,
                     null,

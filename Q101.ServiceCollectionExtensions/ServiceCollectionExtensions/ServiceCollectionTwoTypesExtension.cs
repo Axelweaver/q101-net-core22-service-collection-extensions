@@ -14,9 +14,9 @@ namespace Q101.ServiceCollectionExtensions.ServiceCollectionExtensions
         /// <typeparam name="TImplemented"></typeparam>
         /// <param name="services">Implementing type</param>
         /// <returns></returns>
-        public static BindingTypes RegisterTypes<T, TImplemented>(this IServiceCollection services)
+        public static TypesBinder RegisterTypes<T, TImplemented>(this IServiceCollection services)
         {
-            var bindingTypes = new BindingTypes
+            var bindingTypes = new TypesBinder
             {
                 Services = services,
 

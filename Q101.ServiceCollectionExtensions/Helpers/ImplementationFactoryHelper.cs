@@ -13,7 +13,7 @@ namespace Q101.ServiceCollectionExtensions.Helpers
         /// <param name="provider"></param>
         /// <param name="type"></param>
         /// <returns></returns>
-        internal static object PropsAutoWired(IServiceProvider provider, Type type)
+        internal object PropsAutoWired(IServiceProvider provider, Type type)
         {
             var obj = Activator.CreateInstance(type);
 

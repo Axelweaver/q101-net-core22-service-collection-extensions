@@ -17,7 +17,7 @@ namespace Q101.ServiceCollectionExtensions.ServiceCollectionExtensions
         /// <param name="assembly">Assembly of types</param>
         /// <param name="nameComparer">Type name comparer for bind</param>
         /// <returns></returns>
-        public static BindingTypes RegisterAssemblyTypesByName(this IServiceCollection services, 
+        public static TypesBinder RegisterAssemblyTypesByName(this IServiceCollection services, 
                                                Assembly assembly,
                                                Func<string, bool> nameComparer)
         {
@@ -26,7 +26,7 @@ namespace Q101.ServiceCollectionExtensions.ServiceCollectionExtensions
                 .Where(t => !t.IsInterface
                             && nameComparer(t.Name));
 
-            var bindingTypes = new BindingTypes
+            var bindingTypes = new TypesBinder
             {
                 Types = types,
                 Services = services

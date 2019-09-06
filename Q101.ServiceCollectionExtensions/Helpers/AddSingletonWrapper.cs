@@ -8,6 +8,17 @@ namespace Q101.ServiceCollectionExtensions.Helpers
     /// </summary>
     internal class AddSingletonWrapper
     {
+        private readonly ImplementationFactoryHelper _implementationFactoryHelper;
+
+        /// <summary>
+        /// ctor
+        /// </summary>
+        /// <param name="implementationFactoryHelper"></param>
+        internal AddSingletonWrapper(ImplementationFactoryHelper implementationFactoryHelper)
+        {
+            _implementationFactoryHelper = implementationFactoryHelper;
+        }
+
         /// <summary>
         /// Add singleton bind for type
         /// </summary>
@@ -15,7 +26,7 @@ namespace Q101.ServiceCollectionExtensions.Helpers
         /// <param name="type">Binding type</param>
         /// <param name="implementType">Type which implemented</param>
         /// <param name="propsAutoWired">Use option auto wired property</param>
-        internal static void Add(IServiceCollection services,
+        internal void Add(IServiceCollection services,
                                  Type type,
                                  Type implementType,
                                  bool propsAutoWired)
@@ -26,7 +37,7 @@ namespace Q101.ServiceCollectionExtensions.Helpers
                 {
                     services.AddSingleton(type,
                         provider =>
-                            ImplementationFactoryHelper.PropsAutoWired(provider, type));
+                            _implementationFactoryHelper.PropsAutoWired(provider, type));
                 }
                 else
                 {
@@ -39,7 +50,7 @@ namespace Q101.ServiceCollectionExtensions.Helpers
                 {
                     services.AddSingleton(type,
                         provider =>
-                            ImplementationFactoryHelper.PropsAutoWired(provider, implementType));
+                            _implementationFactoryHelper.PropsAutoWired(provider, implementType));
                 }
                 else
                 {

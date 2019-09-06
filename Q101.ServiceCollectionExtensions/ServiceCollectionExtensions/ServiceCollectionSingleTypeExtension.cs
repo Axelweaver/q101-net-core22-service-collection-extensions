@@ -13,9 +13,9 @@ namespace Q101.ServiceCollectionExtensions.ServiceCollectionExtensions
         /// <typeparam name="T">Type</typeparam>
         /// <param name="services">Service collection</param>
         /// <returns></returns>
-        public static BindingTypes RegisterType<T>(this IServiceCollection services)
+        public static TypesBinder RegisterType<T>(this IServiceCollection services)
         {
-            var bindingTypes = new BindingTypes
+            var bindingTypes = new TypesBinder
             {
                 Services = services,
 
