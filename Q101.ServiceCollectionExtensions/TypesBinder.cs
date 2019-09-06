@@ -145,7 +145,7 @@ namespace Q101.ServiceCollectionExtensions
                         || !Types.Any())
                         ? Assembly
                             .GetTypes()
-                            .Where(func)
+                            .Where(t => !t.IsInterface && func(t))
                             .ToArray()
                         : Types
                             .Where(func)
@@ -170,10 +170,10 @@ namespace Q101.ServiceCollectionExtensions
                         || !Types.Any())
                         ? Assembly
                             .GetTypes()
-                            .Where(t => nameComparer(t.Name))
+                            .Where(t => !t.IsInterface && nameComparer(t.Name))
                             .ToArray()
                         : Types
-                            .Where(t => nameComparer(t.Name))
+                            .Where(t => !t.IsInterface && nameComparer(t.Name))
                             .ToArray();
             }
 
@@ -194,7 +194,10 @@ namespace Q101.ServiceCollectionExtensions
                 }
                 else if (Assembly != null)
                 {
-                    Types = Assembly.GetTypes();
+                    Types = Assembly
+                        .GetTypes()
+                        .Where(t => !t.IsInterface)
+                        .ToArray();
 
                     _typeRangeBindHelper.Bind(this);
                 }
