@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.2</TargetFramework>
-    <Version>1.0.3</Version>
+    <Version>1.0.4</Version>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <Authors>Alexei Tkachev</Authors>
@@ -12,7 +12,7 @@
     <RepositoryType>git</RepositoryType>
     <PackageTags>IServiceCollection Extensions DependencyInjection netCore</PackageTags>
     <Description>This assembly helps you bind types immediately with a list. The assembly is an extension of type IServiceCollection. See the link to the github for a description</Description>
-    <PackageReleaseNotes>Fix filter types of assembly (exclude interfaces)</PackageReleaseNotes>
+    <PackageReleaseNotes>Fix bugs. Optimize</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>
