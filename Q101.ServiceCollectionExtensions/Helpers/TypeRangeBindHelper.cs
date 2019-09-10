@@ -1,4 +1,8 @@
-﻿namespace Q101.ServiceCollectionExtensions.Helpers
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace Q101.ServiceCollectionExtensions.Helpers
 {
     /// <summary>
     /// Bind helper for range types
@@ -26,9 +30,16 @@
         /// Bind range types
         /// </summary>
         /// <param name="bindingTypes"></param>
-        internal void Bind(TypesBinder bindingTypes)
+        /// <param name="types"></param>
+        internal void Bind(TypesBinder bindingTypes, IEnumerable<Type> types)
         {
-            foreach (var type in bindingTypes.Types)
+            types = (Type[]) types;
+
+            if (types == null || !types.Any())
+            {
+                return;
+            }
+            foreach (var type in types)
             {
                 if (bindingTypes.IsImplementByInterface)
                 {

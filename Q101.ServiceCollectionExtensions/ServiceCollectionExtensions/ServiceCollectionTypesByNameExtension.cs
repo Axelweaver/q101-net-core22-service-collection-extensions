@@ -21,16 +21,11 @@ namespace Q101.ServiceCollectionExtensions.ServiceCollectionExtensions
                                                Assembly assembly,
                                                Func<string, bool> nameComparer)
         {
-            var types = assembly
-                .GetTypes()
-                .Where(t => !t.IsInterface
-                            && nameComparer(t.Name));
-
             var bindingTypes = new TypesBinder
             {
                 Assembly = assembly,
-                Types = types,
-                Services = services
+                Services = services,
+                NameComparer = nameComparer
             };
 
             return bindingTypes;

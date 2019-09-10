@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using Microsoft.Extensions.DependencyInjection;
@@ -29,9 +28,14 @@ namespace Q101.ServiceCollectionExtensions
         internal Assembly Assembly { get; set; }
 
         /// <summary>
-        /// Collection types for bindings
+        /// Comparer for name of type
         /// </summary>
-        internal IEnumerable<Type> Types { get; set; }
+        internal Func<string, bool> NameComparer { get; set; }
+
+        /// <summary>
+        /// Comparer for type
+        /// </summary>
+        internal Func<Type, bool> TypeComparer { get; set; }
 
         /// <summary>
         /// Services collection
@@ -136,21 +140,7 @@ namespace Q101.ServiceCollectionExtensions
         /// <param name="func"></param>
         public TypesBinder Where(Func<Type, bool> func)
         {
-            if (Assembly != null
-                || Types != null && Types.Any())
-            {
-                Types =
-                    Assembly != null
-                    && (Types == null
-                        || !Types.Any())
-                        ? Assembly
-                            .GetTypes()
-                            .Where(t => !t.IsInterface && func(t))
-                            .ToArray()
-                        : Types
-                            .Where(func)
-                            .ToArray();
-            }
+            TypeComparer = func;
 
             return this;
         }
@@ -161,21 +151,7 @@ namespace Q101.ServiceCollectionExtensions
         /// <param name="nameComparer"></param>
         public TypesBinder WhereTypeName(Func<string, bool> nameComparer)
         {
-            if (Assembly != null
-                || Types != null && Types.Any())
-            {
-                Types =
-                    Assembly != null
-                    && (Types == null
-                        || !Types.Any())
-                        ? Assembly
-                            .GetTypes()
-                            .Where(t => !t.IsInterface && nameComparer(t.Name))
-                            .ToArray()
-                        : Types
-                            .Where(t => !t.IsInterface && nameComparer(t.Name))
-                            .ToArray();
-            }
+            NameComparer = nameComparer;
 
             return this;
         }
@@ -185,22 +161,16 @@ namespace Q101.ServiceCollectionExtensions
         /// </summary>
         public void Bind()
         {
-            if (Assembly != null
-                || Types != null && !Types.Any())
+            if (Assembly != null)
             {
-                if (Types != null && !Types.Any())
-                {
-                    _typeRangeBindHelper.Bind(this);
-                }
-                else if (Assembly != null)
-                {
-                    Types = Assembly
-                        .GetTypes()
-                        .Where(t => !t.IsInterface)
-                        .ToArray();
+                var types = Assembly
+                    .GetTypes()
+                    .Where(t => !t.IsInterface
+                        && (TypeComparer == null || TypeComparer(t))
+                        && (NameComparer == null || NameComparer(t.Name)))
+                    .ToArray();
 
-                    _typeRangeBindHelper.Bind(this);
-                }
+                _typeRangeBindHelper.Bind(this, types);                        
             }
             else if (SingleType != null)
             {

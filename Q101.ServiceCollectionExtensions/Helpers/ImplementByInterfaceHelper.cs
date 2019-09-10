@@ -38,8 +38,8 @@ namespace Q101.ServiceCollectionExtensions.Helpers
                             .FirstOrDefault();
 
             _addBindingWrapper.Add(services, 
-                                   type, 
                                    implementedInterface, 
+                                   type,
                                    options, 
                                    propertyAutoWired);
         }
