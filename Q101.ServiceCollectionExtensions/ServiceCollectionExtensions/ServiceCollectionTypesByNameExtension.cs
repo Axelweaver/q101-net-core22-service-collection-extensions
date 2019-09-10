@@ -28,6 +28,7 @@ namespace Q101.ServiceCollectionExtensions.ServiceCollectionExtensions
 
             var bindingTypes = new TypesBinder
             {
+                Assembly = assembly,
                 Types = types,
                 Services = services
             };

@@ -28,5 +28,15 @@ Install-Package Q101.ServiceCollectionExtensions -Version 1.0.3
                 .PropertiesAutowired() // Set properties values                
                 .Bind();        
     ...
+            services.RegisterAssemblyTypesByName(typeof(IStudentRepository).Assembly,
+                name => name.EndsWith("Repository")) // Condition for name of type
+                .AsScoped()    // Similarly Like As services.AddScoped(T1, T2)
+                .AsImplementedInterfaces() // Set binding like as services.AddScoped<IRepository, Repository>();                
+                .Bind();
+     
 
 ```
+
+
+
+it is always necessary to execute the **.Bind()** method at the very end after all conditions
