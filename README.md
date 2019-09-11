@@ -17,7 +17,9 @@ Install-Package Q101.ServiceCollectionExtensions -Version 1.0.4
 
 ```cs
     ...
-    
+    public static class ServiceCollectionExtensions 
+    {
+        
         public static void RegisterServices(this IServiceCollection services)
         {
             services.RegisterAssemblyTypes(typeof(ITypeInterface).Assembly)
@@ -37,6 +39,44 @@ Install-Package Q101.ServiceCollectionExtensions -Version 1.0.4
      
 
 ```
+**Begin**
+
+```cs
+
+        /* extension methods for IServiceCollection */
+
+        ...
+    public static class ServiceCollectionExtensions 
+    {
+    
+        public static void RegisterServices(this IServiceCollection services)
+        {
+            // Bind one type:
+            services.RegisterType<Student>
+                    .AsScoped()
+                    .PropertiesAutowired()
+                    .Bind();
+
+            // Bind type as implement of interface:
+            services.RegisterType<ISchool,School>
+                    .AsTransient()
+                    .Bind();
+                    
+            // For bind many types use methods:
+            
+    services.RegisterAssemblyTypes(Assembly assembly) /* Specify the assembly, where the necessary types. 
+                                                        Then you will need to use the where method. */
+                                                        
+    services.RegisterAssemblyTypesByName(Assembly assembly,
+                                         Func<string, bool> nameComparer)
+    /*
+        After the assembly, the condition for searching for types in this 
+        assembly by their name is added.
+    */
+    
+
+```
+
 **Conditions**
 
 ```cs
