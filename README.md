@@ -1,7 +1,6 @@
 # Q101.ServiceCollectionExtensions
 
 [![NuGet Package](https://img.shields.io/nuget/v/Q101.ServiceCollectionExtensions.svg)](https://www.nuget.org/packages/Q101.ServiceCollectionExtensions)
-
 [![NuGet Package](https://img.shields.io/nuget/dt/Q101.ServiceCollectionExtensions.svg)](https://www.nuget.org/packages/Q101.ServiceCollectionExtensions)
 
 
