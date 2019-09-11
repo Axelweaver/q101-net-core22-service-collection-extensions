@@ -15,6 +15,46 @@ Install-Package Q101.ServiceCollectionExtensions -Version 1.0.4
 
 #### Example:
 
+In your web project create new static class ServiceCollectionExtensions with method RegisterServices:
+
+```cs
+using Microsoft.Extensions.DependencyInjection;
+
+namespace Q101.MyAwesomeProject
+{
+    public static class ServiceCollectionExtensions 
+    {
+        
+        public static void RegisterServices(this IServiceCollection services)
+        {
+        
+        }
+    }
+}
+
+```
+
+Next, in the Startup class in the project, add the use of your extension method to the ConfigureServices method:
+
+```cs
+
+namespace Q101.MyAwesomeProject
+{
+
+        ...
+        
+        public void ConfigureServices(IServiceCollection services)
+        {
+        
+            ...
+            
+            services.RegisterServices();
+
+
+```
+
+And then in the previously created class add type bindings
+
 ```cs
     ...
     public static class ServiceCollectionExtensions 
