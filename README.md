@@ -1,4 +1,9 @@
-# q101-net-core22-service-collection-extensions
+# Q101.ServiceCollectionExtensions
+
+[![NuGet Package](https://img.shields.io/nuget/v/Q101.ServiceCollectionExtensions.svg)](https://www.nuget.org/packages/Q101.ServiceCollectionExtensions)
+
+[![NuGet Package](https://img.shields.io/nuget/dt/Q101.ServiceCollectionExtensions.svg)](https://www.nuget.org/packages/Q101.ServiceCollectionExtensions)
+
 
 This is an assembly extension for the type of IServiceCollection platform of dot net core version 2.2 and higher
 
